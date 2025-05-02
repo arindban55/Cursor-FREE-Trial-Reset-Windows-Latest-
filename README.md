@@ -27,8 +27,7 @@ It's intended to help developers evaluate the app before deciding to purchase.
 
 ### Option 1: Run via PowerShell (Recommended)
 
-1. **Download the Script**  
-   👉 [Click to download `Reset-CursorTrial.ps1`](https://github.com/arindban55/Cursor-FREE-Trial-Reset-Windows-Latest-/raw/main/Reset-CursorTrial.ps1)
+1. **Download the Script**
 
 2. **Run PowerShell as Administrator**
 
