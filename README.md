@@ -64,8 +64,4 @@ If this helped you:
 💬 Open an issue for bugs or suggestions
 
 🔗 Share the repo with others:
-
-sql
-Copy
-Edit
 https://github.com/arindban55/Cursor-FREE-Trial-Reset-Windows-Latest-
