@@ -51,3 +51,21 @@ It's intended to help developers evaluate the app before deciding to purchase.
     ```
 
 ---
+
+
+📄 License
+This project is licensed under the MIT License.
+
+🙌 Support
+If this helped you:
+
+⭐ Star the repo
+
+💬 Open an issue for bugs or suggestions
+
+🔗 Share the repo with others:
+
+sql
+Copy
+Edit
+https://github.com/arindban55/Cursor-FREE-Trial-Reset-Windows-Latest-
