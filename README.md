@@ -22,14 +22,22 @@ Download the Script Reset-CursorTrial.ps1
 Run PowerShell as Administrator
 
 Navigate to Script Location
-
 powershell
 cd "C:\Path\To\Downloaded\Script"
+
 Temporarily Allow Script Execution
-
-powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
-Execute the Script
 
-powershell
+Execute the Script
 .\Reset-CursorTrial.ps1
+
+
+🙌 Support
+If this helped you:
+
+⭐ Star the repo
+
+💬 Share feedback via Issues
+
+🔗 Share the link:
+https://github.com/arindban55/Cursor-FREE-Trial-Reset-Windows-Latest-
