@@ -1,31 +1,76 @@
-# Cursor AI Trial Reset Script (Windows)
+<#
+.SYNOPSIS
+    Resets the trial data for Cursor AI on Windows.
 
-This PowerShell script resets the free trial of [Cursor AI](https://cursor.so) by:
-- Clearing local app data
-- Randomizing the MachineGuid
-- (Optionally) Spoofing MAC addresses (can be turned off)
+.DESCRIPTION
+    This script deletes local data files and registry keys associated with the trial usage
+    of Cursor AI, giving the appearance of a fresh installation.
 
-## ⚠️ Disclaimer
-This script is for educational purposes only. Do not use it to violate the terms of service of any software.
+.NOTES
+    Author: arindban55
+    GitHub: https://github.com/arindban55/Cursor-FREE-Trial-Reset-Windows-Latest-
+    Intended for educational use only.
+#>
 
-## 💻 Usage
+function Remove-Folder {
+    param([string]$path)
+    if (Test-Path $path) {
+        try {
+            Remove-Item -Path $path -Recurse -Force
+            Write-Host "✅ Removed: $path"
+        } catch {
+            Write-Warning "⚠️ Failed to remove $path: $_"
+        }
+    } else {
+        Write-Host "ℹ️ Path not found: $path"
+    }
+}
 
-1. Download the script.
-2. Run PowerShell as Administrator.
-3. Allow scripts to run:
-   ```powershell
-   Set-ExecutionPolicy Bypass -Scope Process -Force
-Navigate to the folder:
+function Remove-RegistryKey {
+    param([string]$keyPath)
+    if (Test-Path $keyPath) {
+        try {
+            Remove-Item -Path $keyPath -Recurse -Force
+            Write-Host "✅ Removed registry key: $keyPath"
+        } catch {
+            Write-Warning "⚠️ Failed to remove registry key $keyPath: $_"
+        }
+    } else {
+        Write-Host "ℹ️ Registry key not found: $keyPath"
+    }
+}
 
-powershell
-cd "C:\Path\To\Script"
-Run the script:
+Write-Host "`n🧹 Resetting Cursor AI Trial..." -ForegroundColor Cyan
 
-powershell
-.\Reset-CursorTrial.ps1
-Restart your PC and clear browser cache before using Cursor again.
+# Kill Cursor process if running
+Get-Process -Name "Cursor" -ErrorAction SilentlyContinue | ForEach-Object {
+    try {
+        Stop-Process -Id $_.Id -Force
+        Write-Host "🛑 Process killed: Cursor"
+    } catch {
+        Write-Warning "⚠️ Could not kill Cursor process: $_"
+    }
+}
 
-📝 Notes
-Original MachineGuid is backed up automatically to your home directory.
+# Delete trial-related folders
+$foldersToDelete = @(
+    "$env:APPDATA\Cursor",
+    "$env:LOCALAPPDATA\Cursor",
+    "$env:USERPROFILE\.cursor"
+)
 
-MAC spoofing may not work on all adapters (can be disabled).
+foreach ($folder in $foldersToDelete) {
+    Remove-Folder -path $folder
+}
+
+# Delete registry keys (adjust these if needed)
+$registryKeys = @(
+    "HKCU:\Software\Cursor",
+    "HKCU:\Software\Classes\CLSID\{Cursor-App-Example}"
+)
+
+foreach ($key in $registryKeys) {
+    Remove-RegistryKey -keyPath $key
+}
+
+Write-Host "`n✅ Cursor AI Trial reset complete. Restart the app to check." -ForegroundColor Green
