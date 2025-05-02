@@ -1,76 +1,42 @@
-<#
-.SYNOPSIS
-    Resets the trial data for Cursor AI on Windows.
+🎯 Cursor FREE Trial Reset Script (Windows)
+This PowerShell script resets the trial period of Cursor AI on Windows devices. It's intended to help developers evaluate the app before deciding to purchase.
 
-.DESCRIPTION
-    This script deletes local data files and registry keys associated with the trial usage
-    of Cursor AI, giving the appearance of a fresh installation.
+⚠️ Disclaimer: This script is for educational purposes only. Please support the Cursor team by purchasing a license if you find the app useful.
 
-.NOTES
-    Author: arindban55
-    GitHub: https://github.com/arindban55/Cursor-FREE-Trial-Reset-Windows-Latest-
-    Intended for educational use only.
-#>
+🧰 Features
+⚡ One-click trial reset
 
-function Remove-Folder {
-    param([string]$path)
-    if (Test-Path $path) {
-        try {
-            Remove-Item -Path $path -Recurse -Force
-            Write-Host "✅ Removed: $path"
-        } catch {
-            Write-Warning "⚠️ Failed to remove $path: $_"
-        }
-    } else {
-        Write-Host "ℹ️ Path not found: $path"
-    }
-}
+✅ Compatible with latest Windows versions
 
-function Remove-RegistryKey {
-    param([string]$keyPath)
-    if (Test-Path $keyPath) {
-        try {
-            Remove-Item -Path $keyPath -Recurse -Force
-            Write-Host "✅ Removed registry key: $keyPath"
-        } catch {
-            Write-Warning "⚠️ Failed to remove registry key $keyPath: $_"
-        }
-    } else {
-        Write-Host "ℹ️ Registry key not found: $keyPath"
-    }
-}
+🛡️ Safe and commented for public use
 
-Write-Host "`n🧹 Resetting Cursor AI Trial..." -ForegroundColor Cyan
+📁 Files in This Repository
+Reset-CursorTrial.ps1 — Trial reset PowerShell script
 
-# Kill Cursor process if running
-Get-Process -Name "Cursor" -ErrorAction SilentlyContinue | ForEach-Object {
-    try {
-        Stop-Process -Id $_.Id -Force
-        Write-Host "🛑 Process killed: Cursor"
-    } catch {
-        Write-Warning "⚠️ Could not kill Cursor process: $_"
-    }
-}
+README.md — Instructions and script details
 
-# Delete trial-related folders
-$foldersToDelete = @(
-    "$env:APPDATA\Cursor",
-    "$env:LOCALAPPDATA\Cursor",
-    "$env:USERPROFILE\.cursor"
-)
+🚀 How to Use
+Option 1: Run via PowerShell (Recommended)
+Download the Script
+Click here to download Reset-CursorTrial.ps1
 
-foreach ($folder in $foldersToDelete) {
-    Remove-Folder -path $folder
-}
+Run PowerShell as Administrator
 
-# Delete registry keys (adjust these if needed)
-$registryKeys = @(
-    "HKCU:\Software\Cursor",
-    "HKCU:\Software\Classes\CLSID\{Cursor-App-Example}"
-)
+Navigate to Script Location
 
-foreach ($key in $registryKeys) {
-    Remove-RegistryKey -keyPath $key
-}
+powershell
+Copy
+Edit
+cd "C:\Path\To\Downloaded\Script"
+Temporarily Allow Script Execution
 
-Write-Host "`n✅ Cursor AI Trial reset complete. Restart the app to check." -ForegroundColor Green
+powershell
+Copy
+Edit
+Set-ExecutionPolicy Bypass -Scope Process -Force
+Execute the Script
+
+powershell
+Copy
+Edit
+.\Reset-CursorTrial.ps1
